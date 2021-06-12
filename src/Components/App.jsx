@@ -1,5 +1,5 @@
 import React from 'react';
-import AppBar from './AppBar/AppBar';
+import AppBar from './Header/Header';
 import Navigation from './Navigation/Navigation';
 import BuildingOverview from './Overview/BuildingOverview';
 import FloorDetail from './FloorDetail/FloorDetail';
