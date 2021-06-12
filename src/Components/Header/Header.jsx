@@ -2,13 +2,18 @@ import React from 'react';
 import { makeStyles, fade } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import ToolBar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+// import IconButton from '@material-ui/core/IconButton';
+// import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import { DRAWER_WIDTH } from '../config/layoutConfig';
 
 const useStyles = makeStyles((theme) => ({
+  header: {
+    width: `calc(100% - ${DRAWER_WIDTH}px)`,
+    marginLeft: DRAWER_WIDTH,
+  },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -51,11 +56,11 @@ function Header() {
   const classes = useStyles();
 
   return (
-    <AppBar>
+    <AppBar className={classes.header}>
       <ToolBar>
-        <IconButton edge="start" aria-label="open drawer">
+        {/* <IconButton edge="start" aria-label="open drawer">
           <MenuIcon />
-        </IconButton>
+        </IconButton> */}
         <Typography variant="h5">Radiator Labs</Typography>
         <div className={classes.search}>
           <div className={classes.searchIcon}>
@@ -66,7 +71,7 @@ function Header() {
             inputProps={{ 'aria-label': 'search' }}
             classes={{
               root: classes.inputRoot,
-              input: classes.inputInput
+              input: classes.inputInput,
             }}
           />
         </div>

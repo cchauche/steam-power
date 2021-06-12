@@ -1,5 +1,5 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline'
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
 import BuildingOverview from './Overview/BuildingOverview';
@@ -9,8 +9,10 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <Header />
       <Sidebar />
+      <div>
+        <Header />
+      </div>
       <BuildingOverview />
       <FloorDetail />
     </>
