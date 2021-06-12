@@ -1,10 +1,17 @@
 import React from 'react';
+import AppBar from './AppBar/AppBar';
+import Navigation from './Navigation/Navigation';
+import BuildingOverview from './Overview/BuildingOverview';
+import FloorDetail from './FloorDetail/FloorDetail';
 
 function App() {
   return (
-    <div>
-      <h1>Hello World!</h1>
-    </div>
+    <>
+      <AppBar />
+      <Navigation />
+      <BuildingOverview />
+      <FloorDetail />
+    </>
   );
 }
 
