@@ -61,7 +61,7 @@ function Header() {
         {/* <IconButton edge="start" aria-label="open drawer">
           <MenuIcon />
         </IconButton> */}
-        <Typography variant="h5">Radiator Labs</Typography>
+        <Typography variant="h5" component="h1">Radiator Labs</Typography>
         <div className={classes.search}>
           <div className={classes.searchIcon}>
             <SearchIcon />

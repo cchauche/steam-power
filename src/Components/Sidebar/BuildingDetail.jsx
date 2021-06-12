@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 function BuildingDetail() {
   return (
     <div>
-      <Typography variant="h6">Street Address</Typography>
+      <Typography variant="h6" component="h2">Street Address</Typography>
 
       <div className="cover">
         <div
