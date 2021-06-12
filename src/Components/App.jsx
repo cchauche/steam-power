@@ -1,14 +1,16 @@
 import React from 'react';
-import AppBar from './Header/Header';
-import Navigation from './Navigation/Navigation';
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Header from './Header/Header';
+import Sidebar from './Sidebar/Sidebar';
 import BuildingOverview from './Overview/BuildingOverview';
 import FloorDetail from './FloorDetail/FloorDetail';
 
 function App() {
   return (
     <>
-      <AppBar />
-      <Navigation />
+      <CssBaseline />
+      <Header />
+      <Sidebar />
       <BuildingOverview />
       <FloorDetail />
     </>
