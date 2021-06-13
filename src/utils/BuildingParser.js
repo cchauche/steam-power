@@ -1,8 +1,7 @@
 import config from './config';
 
-
 /**
- * @param {Object} Cozy data for the whole building
+ * @param {Object} building Cozy data object for the whole building
  */
 export default class BuildingParser {
   constructor(building) {
@@ -12,6 +11,12 @@ export default class BuildingParser {
     this.tempErrCount = 0;
   }
 
+  /**
+   * Method that should be used to parse all the building data finding
+   * and reporting any node errors
+   * @returns {Array} Returns array of floor objects after being decorated
+   * with errors
+   */
   parseBuilding() {
     for (const floor of this.floors) {
       this.decorateFloorErr(floor);
@@ -19,6 +24,14 @@ export default class BuildingParser {
     return this.floors;
   }
 
+  /**
+   * This function calls a series of other functions that check the entire
+   * floor's nodes for errors.  Any errors that are found are added to the
+   * 'errors' object which is is then added to the floor object before
+   * returning the floor.
+   * @param {Object} floor Floor object
+   * @returns {Object} Same floor object after being decorated
+   */
   decorateFloorErr(floor) {
     const errors = {
       tempErr: [],
@@ -33,6 +46,12 @@ export default class BuildingParser {
     return floor;
   }
 
+  /**
+   *
+   * @param {Object} spaces Spaces object
+   * @param {Object} errors Errors object that is passe down from floor
+   * to be decorated with any errors.
+   */
   checkSpaces(spaces, errors) {
     spaces.forEach((space) => {
       space.radiators.forEach((radiator) => {
@@ -41,6 +60,12 @@ export default class BuildingParser {
     });
   }
 
+  /**
+   *
+   * @param {Object} radiator Radiator object
+   * @param {Object} errors Errors object that is passe down from floor
+   * to be decorated with any errors.
+   */
   checkRadiator(radiator, errors) {
     for (const node of radiator.nodes) {
       if (this.checkRadiatorTemp(node)) {
@@ -53,6 +78,11 @@ export default class BuildingParser {
     }
   }
 
+  /**
+   *
+   * @param {Object} node Radiator node object
+   * @returns {Boolean} Returns if radiator temp is abnormal
+   */
   checkRadiatorTemp(node) {
     let radiatorTemp = node.radiator_temperature;
     let roomTemp = node.room_temperature;
@@ -65,6 +95,11 @@ export default class BuildingParser {
     return false;
   }
 
+  /**
+   *
+   * @param {Object} node Radiator node object
+   * @returns {Boolean} Returns if node is unresponsive
+   */
   checkIfUnresponsive(node) {
     let messageTime = node.last_message;
     if (this.retrievalTime - messageTime >= config.RESPONSE_INTERVAL) {
