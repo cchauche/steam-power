@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CssBaseline, makeStyles } from '@material-ui/core';
 import { DRAWER_WIDTH, HEADER_HEIGHT } from './config/layoutConfig';
-import axios from 'axios';
+import { fetch } from '../utils';
 import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
 import BuildingOverview from './Overview/BuildingOverview';
@@ -21,13 +21,20 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   const [buildingData, setBuildingData] = useState({});
+  const [tempErrCount, setTempErrCount] = useState(0);
+  const [unresponsiveErrCount, setUnresponsiveErrCount] = useState(0);
 
   useEffect(() => {
     // Fetch data
-    axios.get('/api/1234_test_street').then(({ data }) => {
+    fetch.buildingData('1234_Test_Street').then(({ data }) => {
       setBuildingData(data);
     });
   }, []);
+
+  useEffect(() => {
+    // Update State
+    console.log(buildingData);
+  }, [buildingData]);
 
   return (
     <>
