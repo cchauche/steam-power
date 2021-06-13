@@ -18,9 +18,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+console.log(config);
+
 function App() {
   const classes = useStyles();
-  const [buildingData, setBuildingData] = useState(config.BUILDING_DATA_INIT_STATE);
+  const [buildingData, setBuildingData] = useState(
+    config.BUILDING_DATA_INIT_STATE
+  );
 
   useEffect(() => {
     fetch.buildingData('1234_Test_Street').then(({ data }) => {
@@ -37,7 +41,7 @@ function App() {
     <>
       <CssBaseline />
       <Header />
-      <Sidebar />
+      <Sidebar floors={buildingData.floors} />
       <main className={classes.content}>
         <BuildingOverview
           lastReading={buildingData.retrieved_at}

@@ -1,15 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import { DRAWER_WIDTH } from '../config/layoutConfig';
 import BuildingDetail from './BuildingDetail';
+import FloorMenuItem from './FloorMenuItem';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   drawer: {
     width: DRAWER_WIDTH,
     flexShrink: 0,
@@ -21,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Sidebar({ floors }) {
   const classes = useStyles();
-
   return (
     <Drawer
       className={classes.drawer}
@@ -34,12 +32,16 @@ function Sidebar({ floors }) {
       <BuildingDetail />
       <Divider />
       <List>
-        <ListItem>
-          <ListItemText primary={'1st Floor'} />
-        </ListItem>
+        {floors.map((floor, i) => {
+          return <FloorMenuItem floor={floor} key={i} />;
+        })}
       </List>
     </Drawer>
   );
 }
+
+Sidebar.PropTypes = {
+  floors: PropTypes.array.isRequired,
+};
 
 export default Sidebar;
