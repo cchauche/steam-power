@@ -1,12 +1,7 @@
-import {
-  CardContent,
-  Divider,
-  Grid,
-  Typography,
-  makeStyles,
-  Box,
-} from '@material-ui/core';
+import { CardContent, Divider, Grid, Typography, Box } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
+import PropTypes from 'prop-types';
 import TempDisplay from './TempDisplay';
 import { toLocalTimeDateString } from '../../../utils';
 
@@ -23,11 +18,6 @@ function NodeCardContent({ node }) {
     <>
       <Divider />
       <CardContent>
-        {/* <Box textAlign="center">
-          <Typography variant="subtitle2" color="textSecondary">
-            {node.lora_euid}
-          </Typography>
-        </Box> */}
         <Grid container direction="row" alignItems="center">
           <TempDisplay />
           <Divider
@@ -41,7 +31,7 @@ function NodeCardContent({ node }) {
         <Box textAlign="center" pt={0.5}>
           <Typography variant="subtitle2" color="textSecondary">
             {toLocalTimeDateString(node.last_message)}
-            <br/>
+            <br />
             {node.lora_euid}
           </Typography>
         </Box>
@@ -49,5 +39,17 @@ function NodeCardContent({ node }) {
     </>
   );
 }
+
+NodeCardContent.propTypes = {
+  node: PropTypes.shape({
+    last_message: PropTypes.number,
+    lora_euid: PropTypes.string,
+    radiator_temperature: PropTypes.number,
+    room_temperature: PropTypes.number,
+    hasTempErr: PropTypes.bool,
+    isUnresponsive: PropTypes.bool,
+    room_feel: PropTypes.string,
+  }).isRequired,
+};
 
 export default NodeCardContent;

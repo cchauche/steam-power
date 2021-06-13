@@ -1,17 +1,11 @@
 import React from 'react';
-import {
-  Card,
-  CardHeader,
-  Grid,
-  Typography,
-  CardContent,
-  Box,
-  Divider,
-} from '@material-ui/core';
+import PropTypes from 'prop-types';
+import { Card, CardHeader, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import NodeCardContent from './NodeCardContent';
+import NoNodeContent from './NoNodeContent';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   card: {
     minWidth: 200,
   },
@@ -19,6 +13,20 @@ const useStyles = makeStyles((theme) => ({
 
 function RadiatorCard({ radiator, spaceName }) {
   const classes = useStyles();
+  let content = null;
+
+  if (radiator) {
+    content =
+      radiator.nodes.length > 0 ? (
+        radiator.nodes.map((node, i) => {
+          return <NodeCardContent node={node} key={i} />;
+        })
+      ) : (
+        <NoNodeContent text={'NO COZY'} />
+      );
+  } else {
+    content = <NoNodeContent text={'NO RADIATOR'} />;
+  }
 
   return (
     <Grid item>
@@ -27,25 +35,18 @@ function RadiatorCard({ radiator, spaceName }) {
           title={spaceName}
           subheader={radiator === null ? '' : 'Radiator ' + radiator.number}
         ></CardHeader>
-        {radiator === null ? (
-          <>
-            <Divider />
-            <CardContent>
-              <Box textAlign="center">
-                <Typography variant="h4" component="p">
-                  No Nodes
-                </Typography>
-              </Box>
-            </CardContent>
-          </>
-        ) : (
-          radiator.nodes.map((node, i) => {
-            return <NodeCardContent node={node} key={i} />;
-          })
-        )}
+        {content}
       </Card>
     </Grid>
   );
 }
+
+RadiatorCard.propTypes = {
+  radiator: PropTypes.shape({
+    nodes: PropTypes.array,
+    number: PropTypes.number,
+  }),
+  spaceName: PropTypes.string,
+};
 
 export default RadiatorCard;
