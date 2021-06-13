@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import TempDisplay from './TempDisplay';
+import { toLocalTimeDateString } from '../../../utils';
 
 const useStyles = makeStyles((theme) => ({
   divider: {
@@ -15,16 +16,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NodeCardContent() {
+function NodeCardContent({ node }) {
   const classes = useStyles();
 
   return (
     <>
       <Divider />
       <CardContent>
-        <Box textAlign="center">
-          <Typography variant="subtitle2" color="textSecondary">F6965BF0B621748E</Typography>
-        </Box>
+        {/* <Box textAlign="center">
+          <Typography variant="subtitle2" color="textSecondary">
+            {node.lora_euid}
+          </Typography>
+        </Box> */}
         <Grid container direction="row" alignItems="center">
           <TempDisplay />
           <Divider
@@ -36,7 +39,11 @@ function NodeCardContent() {
         </Grid>
         <Divider />
         <Box textAlign="center" pt={0.5}>
-          <Typography variant="subtitle2" color="textSecondary">10:00am Fri June 10 2021</Typography>
+          <Typography variant="subtitle2" color="textSecondary">
+            {toLocalTimeDateString(node.last_message)}
+            <br/>
+            {node.lora_euid}
+          </Typography>
         </Box>
       </CardContent>
     </>

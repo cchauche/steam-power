@@ -1,15 +1,23 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
-// import Typography from '@material-ui/core/Typography';
 import FloorDivider from './FloorDivider';
+import { toFriendlyFloorName } from '../../utils';
 
 function FloorDetail({ floor }) {
   if (floor) {
     return (
       <Paper square variant="outlined">
         {/* Conditionally Add Spaces */}
+        <FloorDivider
+          spaces={floor.spaces}
+          title={toFriendlyFloorName(floor.name)}
+        />
         {/* Conditionally Add Units */}
-        <FloorDivider />
+        {floor.units.map((unit, i) => {
+          return (
+            <FloorDivider spaces={unit.spaces} title={unit.name} key={i} />
+          );
+        })}
       </Paper>
     );
   } else {

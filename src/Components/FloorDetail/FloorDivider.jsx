@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import CardGrid from '../CardGrid/CardGrid';
-import SpaceCard from '../CardGrid/Cards/SpaceCard';
+import RadiatorCard from '../CardGrid/Cards/RadiatorCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,24 +22,45 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function FloorDivider() {
+function FloorDivider({ spaces, title }) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <div className={classes.container}>
         <Typography variant="h4" className={classes.title}>
-          1st Floor
+          {title}
         </Typography>
         {''}
         <hr className={classes.divider} />
       </div>
       <CardGrid>
-        <SpaceCard />
-        <SpaceCard />
-        <SpaceCard />
-        <SpaceCard />
-        <SpaceCard />
+        {(() => {
+          let cards = [];
+          for (const space of spaces) {
+            if (space.radiators.length === 0) {
+              cards.push(
+                <RadiatorCard
+                  radiator={null}
+                  spaceName={space.name}
+                  key={title + '-' + space.name + '0'}
+                />
+              );
+            } else {
+              let radiatorCards = space.radiators.map((radiator) => {
+                return (
+                  <RadiatorCard
+                    radiator={radiator}
+                    spaceName={space.name}
+                    key={title + '-' + space.name + radiator.number}
+                  />
+                );
+              });
+              cards = cards.concat(radiatorCards);
+            }
+          }
+          return cards;
+        })()}
       </CardGrid>
     </div>
   );
