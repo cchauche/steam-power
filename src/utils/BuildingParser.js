@@ -9,6 +9,7 @@ export default class BuildingParser {
     this.retrievalTime = building.retrieved_at;
     this.unresponsiveCount = 0;
     this.tempErrCount = 0;
+    this.nodeCount = 0;
   }
 
   /**
@@ -68,6 +69,7 @@ export default class BuildingParser {
    */
   checkRadiator(radiator, errors) {
     for (const node of radiator.nodes) {
+      this.nodeCount += 1;
       if (this.checkRadiatorTemp(node)) {
         errors.tempErr.push(node);
       }
