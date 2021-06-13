@@ -9,7 +9,7 @@ function CardGrid({ children }) {
       justify="flex-start"
       alignItems="flex-start"
       wrap="wrap"
-      spacing="2"
+      spacing={2}
     >
       {children}
     </Grid>
