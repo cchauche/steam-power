@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CssBaseline, makeStyles } from '@material-ui/core';
 import { DRAWER_WIDTH, HEADER_HEIGHT } from './config/layoutConfig';
-import { fetch, BuildingParser } from '../utils';
+import { fetch, BuildingParser, config } from '../utils';
 import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
 import BuildingOverview from './Overview/BuildingOverview';
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
-  const [buildingData, setBuildingData] = useState({});
+  const [buildingData, setBuildingData] = useState(config.BUILDING_DATA_INIT_STATE);
 
   useEffect(() => {
     fetch.buildingData('1234_Test_Street').then(({ data }) => {
@@ -39,7 +39,12 @@ function App() {
       <Header />
       <Sidebar />
       <main className={classes.content}>
-        <BuildingOverview />
+        <BuildingOverview
+          lastReading={buildingData.retrieved_at}
+          nodeCount={buildingData.nodeCount}
+          unresponsiveCount={buildingData.unresponsiveCount}
+          tempErrCount={buildingData.tempErrCount}
+        />
         <FloorDetail />
       </main>
     </>

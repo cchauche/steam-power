@@ -2,6 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import { Toolbar, Typography } from '@material-ui/core';
+import { toLocalTimeDateString } from '../../utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
   detailContainer: {
     flex: '1 1 0',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   divider: {
     borderWidth: '0 2px',
@@ -19,7 +20,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function BuildingOverview() {
+function BuildingOverview({
+  lastReading,
+  nodeCount,
+  unresponsiveCount,
+  tempErrCount,
+}) {
   const classes = useStyles();
   return (
     <Paper variant="outlined" square className={classes.root}>
@@ -27,19 +33,19 @@ function BuildingOverview() {
         <div className={classes.detailContainer}>
           <Typography variant="h6">Last Reading</Typography>
           <Typography variant="subtitle2" component="p">
-            1:00pm Sat June 12th 2021
+            {toLocalTimeDateString(lastReading)}
           </Typography>
         </div>
         <div className={classes.detailContainer + ' ' + classes.divider}>
           <Typography variant="h6">Radiator Temp Err</Typography>
           <Typography variant="h6" component="p">
-            3 / 50
+            {tempErrCount + ' / ' + nodeCount}
           </Typography>
         </div>
         <div className={classes.detailContainer}>
           <Typography variant="h6">Unresponsive Nodes</Typography>
           <Typography variant="h6" component="p">
-            2 / 50
+            {unresponsiveCount + ' / ' + nodeCount}
           </Typography>
         </div>
       </Toolbar>
