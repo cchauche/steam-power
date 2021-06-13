@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function Sidebar({ floors }) {
+function Sidebar({ floors, selectedFloor, setSelectedFloor }) {
   const classes = useStyles();
   return (
     <Drawer
@@ -33,14 +33,22 @@ function Sidebar({ floors }) {
       <Divider />
       <List>
         {floors.map((floor, i) => {
-          return <FloorMenuItem floor={floor} key={i} />;
+          return (
+            <FloorMenuItem
+              floor={floor}
+              key={i}
+              index={i}
+              setSelectedFloor={setSelectedFloor}
+              selectedFloor={selectedFloor}
+            />
+          );
         })}
       </List>
     </Drawer>
   );
 }
 
-Sidebar.PropTypes = {
+Sidebar.propTypes = {
   floors: PropTypes.array.isRequired,
 };
 

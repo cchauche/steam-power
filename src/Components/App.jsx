@@ -18,13 +18,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-console.log(config);
-
 function App() {
   const classes = useStyles();
   const [buildingData, setBuildingData] = useState(
     config.BUILDING_DATA_INIT_STATE
   );
+  const [selectedFloor, setSelectedFloor] = useState(null);
 
   useEffect(() => {
     fetch.buildingData('1234_Test_Street').then(({ data }) => {
@@ -41,7 +40,11 @@ function App() {
     <>
       <CssBaseline />
       <Header />
-      <Sidebar floors={buildingData.floors} />
+      <Sidebar
+        floors={buildingData.floors}
+        setSelectedFloor={setSelectedFloor}
+        selectedFloor={selectedFloor}
+      />
       <main className={classes.content}>
         <BuildingOverview
           lastReading={buildingData.retrieved_at}
@@ -49,7 +52,7 @@ function App() {
           unresponsiveCount={buildingData.unresponsiveCount}
           tempErrCount={buildingData.tempErrCount}
         />
-        <FloorDetail />
+        <FloorDetail floor={selectedFloor === null ? null : buildingData.floors[selectedFloor]}/>
       </main>
     </>
   );
