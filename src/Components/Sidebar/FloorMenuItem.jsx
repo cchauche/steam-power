@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ListItem, ListItemText } from '@material-ui/core';
 
-function FloorMenuItem({ floor }) {
+function FloorMenuItem({ floor, index }) {
   let totalErrors =
     floor.errors.tempErr.length + floor.errors.unresponsive.length;
   return (
@@ -23,6 +23,7 @@ function FloorMenuItem({ floor }) {
 }
 
 FloorMenuItem.propTypes = {
+  index: PropTypes.number.isRequired,
   floor: PropTypes.shape({
     name: PropTypes.string.isRequired,
     errors: PropTypes.object.isRequired,

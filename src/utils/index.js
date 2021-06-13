@@ -23,4 +23,14 @@ const toLocalTimeDateString = (millisUTC) => {
   return timeString + ' ' + dateString;
 };
 
-export { fetch, BuildingParser, config, toLocalTimeDateString };
+const toFriendlyFloorName = (floorName) => {
+  return isNaN(parseInt(floorName)) ? floorName : 'Floor ' + floorName;
+};
+
+export {
+  fetch,
+  BuildingParser,
+  config,
+  toLocalTimeDateString,
+  toFriendlyFloorName,
+};
