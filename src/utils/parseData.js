@@ -36,6 +36,7 @@ class BuildingParser {
     let roomTemp = node.room_temperature;
     if (Math.abs(radiatorTemp - roomTemp) <= config.RADIATOR_TEMP_RANGE) {
       node.hasTempErr = true;
+      this.tempErrCount += 1;
       return true;
     }
     node.hasTempErr = false;
@@ -46,6 +47,7 @@ class BuildingParser {
     let messageTime = node.last_message;
     if (this.retrievalTime - messageTime >= config.RESPONSE_INTERVAL) {
       node.isUnresponsive = true;
+      this.unresponsiveCount += 1;
       return true;
     }
     node.isUnresponsive = false;
