@@ -6,6 +6,7 @@ import { Toolbar, Typography } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(1),
+    marginBottom: theme.spacing(2),
   },
   detailContainer: {
     flex: '1 1 0',
