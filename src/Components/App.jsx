@@ -1,7 +1,7 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState, useEffect } from 'react';
+import { CssBaseline, makeStyles } from '@material-ui/core';
 import { DRAWER_WIDTH, HEADER_HEIGHT } from './config/layoutConfig';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import axios from 'axios';
 import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
 import BuildingOverview from './Overview/BuildingOverview';
@@ -20,6 +20,15 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
+  const [buildingData, setBuildingData] = useState({});
+
+  useEffect(() => {
+    // Fetch data
+    axios.get('/api/1234_test_street').then(({ data }) => {
+      setBuildingData(data);
+    });
+  }, []);
+
   return (
     <>
       <CssBaseline />

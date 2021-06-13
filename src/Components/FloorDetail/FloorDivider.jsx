@@ -1,6 +1,8 @@
 import React from 'react';
-import { Typography} from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import CardGrid from '../CardGrid/CardGrid';
+import SpaceCard from '../CardGrid/Cards/SpaceCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,6 +34,13 @@ function FloorDivider() {
         {''}
         <hr className={classes.divider} />
       </div>
+      <CardGrid>
+        <SpaceCard />
+        <SpaceCard />
+        <SpaceCard />
+        <SpaceCard />
+        <SpaceCard />
+      </CardGrid>
     </div>
   );
 }
