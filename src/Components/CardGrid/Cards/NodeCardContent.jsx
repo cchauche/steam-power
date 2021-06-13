@@ -10,10 +10,18 @@ const useStyles = makeStyles((theme) => ({
   divider: {
     margin: theme.spacing(0, 1),
   },
+  unresponsiveTime: {
+    color: (node) => {
+      return node.isUnresponsive
+        ? theme.palette.error.main
+        : theme.palette.text.secondary;
+    },
+    fontWeight: 700,
+  },
 }));
 
 function NodeCardContent({ node }) {
-  const classes = useStyles();
+  const classes = useStyles(node);
 
   return (
     <>
@@ -23,19 +31,26 @@ function NodeCardContent({ node }) {
           <RadiatorTempDisplay
             temp={node.radiator_temperature}
             hasTempErr={node.hasTempErr}
+            isUnresponsive={node.isUnresponsive}
           />
+
           <Divider
             orientation="vertical"
             flexItem
             className={classes.divider}
           />
-          <RoomTempDisplay temp={node.room_temperature} roomFeel={node.room_feel}/>
+          <RoomTempDisplay
+            temp={node.room_temperature}
+            roomFeel={node.room_feel}
+            isUnresponsive={node.isUnresponsive}
+          />
         </Grid>
         <Divider />
         <Box textAlign="center" pt={0.5}>
-          <Typography variant="subtitle2" color="textSecondary">
+          <Typography variant="subtitle2" className={classes.unresponsiveTime}>
             {toLocalTimeDateString(node.last_message)}
-            <br />
+          </Typography>
+          <Typography variant="subtitle2" color="textSecondary">
             {node.lora_euid}
           </Typography>
         </Box>
