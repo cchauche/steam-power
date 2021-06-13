@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Sidebar() {
+function Sidebar({ floors }) {
   const classes = useStyles();
 
   return (
