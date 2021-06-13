@@ -1,4 +1,4 @@
 import fetch from './fetch';
-import parseData from './parseData';
+import BuildingParser from './BuildingParser';
 
-export { fetch, parseData };
+export { fetch, BuildingParser };

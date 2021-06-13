@@ -1,6 +1,10 @@
 import config from './config';
 
-class BuildingParser {
+
+/**
+ * @param {Object} Cozy data for the whole building
+ */
+export default class BuildingParser {
   constructor(building) {
     this.floors = building.floors;
     this.retrievalTime = building.retrieved_at;
@@ -12,6 +16,7 @@ class BuildingParser {
     for (const floor of this.floors) {
       this.decorateFloorErr(floor);
     }
+    return this.floors;
   }
 
   decorateFloorErr(floor) {
@@ -19,17 +24,34 @@ class BuildingParser {
       tempErr: [],
       unresponsive: [],
     };
-    // Parse the common area
+    this.checkSpaces(floor.spaces);
     // Parse each unit
+    floor.units.forEach((unit) => {
+      this.checkSpaces(unit.spaces, errors);
+    });
     floor.errors = errors;
     return floor;
   }
 
   checkSpaces(spaces, errors) {
-    // For each space check all the radiators
+    spaces.forEach((space) => {
+      space.radiators.forEach((radiator) => {
+        this.checkRadiator(radiator, errors);
+      });
+    });
   }
 
-  checkRadiator(radiator) {}
+  checkRadiator(radiator, errors) {
+    for (const node of radiator.nodes) {
+      if (this.checkRadiatorTemp(node)) {
+        errors.tempErr.push(node);
+      }
+      if (this.checkIfUnresponsive(node)) {
+        errors.unresponsive.push(node);
+      }
+      this.decorateRoomFeel(node);
+    }
+  }
 
   checkRadiatorTemp(node) {
     let radiatorTemp = node.radiator_temperature;
@@ -69,5 +91,3 @@ class BuildingParser {
     }
   }
 }
-
-export default { BuildingParser };
