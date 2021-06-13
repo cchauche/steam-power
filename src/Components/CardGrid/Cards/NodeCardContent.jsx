@@ -2,8 +2,9 @@ import { CardContent, Divider, Grid, Typography, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import PropTypes from 'prop-types';
-import TempDisplay from './TempDisplay';
+import RadiatorTempDisplay from './RadiatorTempDisplay';
 import { toLocalTimeDateString } from '../../../utils';
+import RoomTempDisplay from './RoomTempDisplay';
 
 const useStyles = makeStyles((theme) => ({
   divider: {
@@ -19,13 +20,16 @@ function NodeCardContent({ node }) {
       <Divider />
       <CardContent>
         <Grid container direction="row" alignItems="center">
-          <TempDisplay />
+          <RadiatorTempDisplay
+            temp={node.radiator_temperature}
+            hasTempErr={node.hasTempErr}
+          />
           <Divider
             orientation="vertical"
             flexItem
             className={classes.divider}
           />
-          <TempDisplay />
+          <RoomTempDisplay temp={node.room_temperature} roomFeel={node.room_feel}/>
         </Grid>
         <Divider />
         <Box textAlign="center" pt={0.5}>

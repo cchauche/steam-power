@@ -1,4 +1,5 @@
 module.exports = {
   DRAWER_WIDTH: 250,
   HEADER_HEIGHT: 64,
+  NODE_CONT_HEIGHT: 75
 };
