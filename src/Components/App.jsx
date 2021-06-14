@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CssBaseline } from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { DRAWER_WIDTH, HEADER_HEIGHT } from './config/layoutConfig';
 import { fetch, BuildingParser, config } from '../utils';
 import Header from './Header/Header';
@@ -45,6 +45,7 @@ function App() {
         floors={buildingData.floors}
         setSelectedFloor={setSelectedFloor}
         selectedFloor={selectedFloor}
+        buildingName={buildingData.name}
       />
       <main className={classes.content}>
         <BuildingOverview
@@ -53,7 +54,11 @@ function App() {
           unresponsiveCount={buildingData.unresponsiveCount}
           tempErrCount={buildingData.tempErrCount}
         />
-        <FloorDetail floor={selectedFloor === null ? null : buildingData.floors[selectedFloor]}/>
+        <FloorDetail
+          floor={
+            selectedFloor === null ? null : buildingData.floors[selectedFloor]
+          }
+        />
       </main>
     </>
   );

@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function Sidebar({ floors, selectedFloor, setSelectedFloor }) {
+function Sidebar({ floors, selectedFloor, setSelectedFloor, buildingName }) {
   const classes = useStyles();
   return (
     <Drawer
@@ -29,7 +29,7 @@ function Sidebar({ floors, selectedFloor, setSelectedFloor }) {
         paper: classes.drawerPaper,
       }}
     >
-      <BuildingDetail />
+      <BuildingDetail buildingName={buildingName} />
       <Divider />
       <List>
         {floors.map((floor, i) => {
@@ -50,6 +50,9 @@ function Sidebar({ floors, selectedFloor, setSelectedFloor }) {
 
 Sidebar.propTypes = {
   floors: PropTypes.array.isRequired,
+  selectedFloor: PropTypes.number,
+  setSelectedFloor: PropTypes.func,
+  buildingName: PropTypes.string,
 };
 
 export default Sidebar;
