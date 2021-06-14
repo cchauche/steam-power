@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import PropTypes from 'prop-types';
 import RadiatorTempDisplay from './RadiatorTempDisplay';
-import { toLocalTimeDateString } from '../../../utils';
+import { toLocalTimeDateString } from '../../utils';
 import RoomTempDisplay from './RoomTempDisplay';
 
 const useStyles = makeStyles((theme) => ({

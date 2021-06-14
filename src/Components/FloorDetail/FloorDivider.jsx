@@ -1,25 +1,28 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import { Typography, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import CardGrid from '../CardGrid/CardGrid';
-import RadiatorCard from '../CardGrid/Cards/RadiatorCard';
+import RadiatorCard from '../Cards/RadiatorCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(1),
   },
-  container: {
+  divider: {
     overflow: 'hidden',
     whiteSpace: 'nowrap',
   },
   title: {
     display: 'inline-block',
   },
-  divider: {
+  line: {
     display: 'inline-block',
     marginLeft: theme.spacing(1),
     width: '100%',
   },
+  cardGrid: {
+    padding: theme.spacing(1, 2)
+  }
 }));
 
 function FloorDivider({ spaces, title }) {
@@ -27,14 +30,22 @@ function FloorDivider({ spaces, title }) {
 
   return (
     <div className={classes.root}>
-      <div className={classes.container}>
+      <div className={classes.divider}>
         <Typography variant="h4" className={classes.title}>
           {title}
         </Typography>
         {''}
-        <hr className={classes.divider} />
+        <hr className={classes.line} />
       </div>
-      <CardGrid>
+      <Grid
+        container
+        direction="row"
+        justify="flex-start"
+        alignItems="flex-start"
+        wrap="wrap"
+        spacing={2}
+        className={classes.cardGrid}
+      >
         {(() => {
           let cards = [];
           for (const space of spaces) {
@@ -61,9 +72,14 @@ function FloorDivider({ spaces, title }) {
           }
           return cards;
         })()}
-      </CardGrid>
+      </Grid>
     </div>
   );
 }
+
+FloorDivider.propTypes = {
+  spaces: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
+};
 
 export default FloorDivider;
