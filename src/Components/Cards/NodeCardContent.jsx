@@ -1,4 +1,5 @@
 import { CardContent, Divider, Grid, Typography, Box } from '@material-ui/core';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -17,6 +18,12 @@ const useStyles = makeStyles((theme) => ({
         : theme.palette.text.secondary;
     },
     fontWeight: 700,
+  },
+  errIcon: {
+    color: theme.palette.error.main,
+    position: 'absolute',
+    right: 0,
+    top: '5px',
   },
 }));
 
@@ -51,13 +58,16 @@ function NodeCardContent({ node }) {
           />
         </Grid>
         <Divider />
-        <Box textAlign="center" pt={0.5}>
+        <Box textAlign="center" pt={0.5} position="relative">
           <Typography variant="subtitle2" className={classes.unresponsiveTime}>
             {toLocalTimeDateString(node.last_message)}
           </Typography>
           <Typography variant="subtitle2" color="textSecondary">
             {node.lora_euid}
           </Typography>
+          {node.isUnresponsive ? (
+            <ErrorOutlineIcon className={classes.errIcon} />
+          ) : null}
         </Box>
       </CardContent>
     </>
