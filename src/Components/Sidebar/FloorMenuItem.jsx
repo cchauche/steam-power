@@ -1,14 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ListItem, ListItemText, Badge } from '@material-ui/core';
-import WarningIcon from '@material-ui/icons/Warning';
+import { makeStyles } from '@material-ui/core/styles';
+import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
 import { toFriendlyFloorName } from '../../utils';
+
+const useStyles = makeStyles((theme) => ({
+  selected: {
+    backgroundColor: theme.palette.secondary.light,
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.light
+    }
+  }
+}));
 
 function FloorMenuItem({ floor, index, selectedFloor, setSelectedFloor }) {
   let totalErrors =
-    floor.errors.tempErr.length + floor.errors.unresponsive.length;
+  floor.errors.tempErr.length + floor.errors.unresponsive.length;
+  let isSelected = selectedFloor === index;
+  const classes = useStyles({isSelected});
   return (
-    <ListItem onClick={() => setSelectedFloor(index)}>
+    <ListItem
+      button
+      onClick={() => setSelectedFloor(index)}
+      className={isSelected ? classes.selected : null}
+    >
       <ListItemText primary={toFriendlyFloorName(floor.name)} />
       {totalErrors > 0 ? (
         <Badge
@@ -17,7 +33,7 @@ function FloorMenuItem({ floor, index, selectedFloor, setSelectedFloor }) {
           overlap="circle"
           max={9}
         >
-          <WarningIcon />
+          <WarningRoundedIcon color="action" />
         </Badge>
       ) : null}
     </ListItem>
