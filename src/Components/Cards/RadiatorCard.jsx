@@ -5,10 +5,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import NodeCardContent from './NodeCardContent';
 import NoNodeContent from './NoNodeContent';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   card: {
-    minWidth: 200,
+    minWidth: 280,
   },
+  header: {
+    backgroundColor: theme.palette.primary.main
+  }
 }));
 
 function RadiatorCard({ radiator, spaceName }) {
@@ -34,6 +37,7 @@ function RadiatorCard({ radiator, spaceName }) {
         <CardHeader
           title={spaceName}
           subheader={radiator === null ? '' : 'Radiator ' + radiator.number}
+          className={classes.header}
         ></CardHeader>
         {content}
       </Card>

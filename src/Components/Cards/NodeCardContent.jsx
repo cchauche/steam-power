@@ -27,7 +27,12 @@ function NodeCardContent({ node }) {
     <>
       <Divider />
       <CardContent>
-        <Grid container direction="row" alignItems="center">
+        <Grid
+          container
+          direction="row"
+          alignItems="center"
+          justify="space-evenly"
+        >
           <RadiatorTempDisplay
             temp={node.radiator_temperature}
             hasTempErr={node.hasTempErr}
