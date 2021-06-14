@@ -1,5 +1,4 @@
 const path = require('path');
-const morgan = require('morgan');
 const fs = require('fs/promises');
 
 const express = require('express');
@@ -9,6 +8,7 @@ app.use(express.static(path.resolve(__dirname, '..', 'public')));
 app.use(express.json());
 
 if (process.env.NODE_ENV !== 'production') {
+  const morgan = require('morgan');
   app.use(morgan('dev'));
 }
 
