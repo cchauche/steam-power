@@ -1,9 +1,16 @@
 import config from './config';
 
 /**
- * @param {Object} building Cozy data object for the whole building
+ * Creates a BuildingParser instance.
  */
 export default class BuildingParser {
+  /**
+   * Create a BuildingParser instance
+   * @param {Object} building Cozy data object for the whole building
+   * @param {Object[]} building.floors Array of floor objects
+   * @param {string} building.name Name of building
+   * @param {number} building.retrieved_at Time in milliseconds when data was retrieved
+   */
   constructor(building) {
     this.floors = building.floors;
     this.retrievalTime = building.retrieved_at;
@@ -52,6 +59,8 @@ export default class BuildingParser {
    * @param {Object} spaces Spaces object
    * @param {Object} errors Errors object that is passe down from floor
    * to be decorated with any errors.
+   * @param {Array} errors.tempErr
+   * @param {Array} errors.unresponsive
    */
   checkSpaces(spaces, errors) {
     spaces.forEach((space) => {
@@ -62,7 +71,8 @@ export default class BuildingParser {
   }
 
   /**
-   *
+   * Check the radiator for unresponsive nodes, temp errors and room feel.
+   * Then decorates the nodes with the results of the checks.
    * @param {Object} radiator Radiator object
    * @param {Object} errors Errors object that is passe down from floor
    * to be decorated with any errors.
@@ -81,8 +91,11 @@ export default class BuildingParser {
   }
 
   /**
-   *
+   * Test if radiator temperature is within normal range. Decorate node with
+   * result of the check.
    * @param {Object} node Radiator node object
+   * @param {number} node.radiator_temperature
+   * @param {number} node.room_temperature
    * @returns {Boolean} Returns if radiator temp is abnormal
    */
   checkRadiatorTemp(node) {
@@ -98,8 +111,10 @@ export default class BuildingParser {
   }
 
   /**
-   *
+   * Check if the last message was within an acceptable range of the retrieval time
+   * and decorate the node with result.
    * @param {Object} node Radiator node object
+   * @param {Object} node.last_message Milliseconds in UTC of node's last message
    * @returns {Boolean} Returns if node is unresponsive
    */
   checkIfUnresponsive(node) {
@@ -114,7 +129,7 @@ export default class BuildingParser {
   }
 
   /**
-   * Will decorate the node with a 'room_feel' property
+   * Will decorate the node with a 'room_feel' property.
    * @param {Object} node Radiator node object
    * @return {Object} Radiator node object
    */
