@@ -139,6 +139,9 @@ export default class BuildingParser {
       if (temp < el.high) {
         node.room_feel = el.name;
         return node;
+      } else if (el.high === null) {
+        node.room_feel = el.name;
+        return node;
       }
     }
   }
