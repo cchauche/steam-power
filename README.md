@@ -1,7 +1,7 @@
 # steam-power
 Dashboard to monitor steam radiators in NYC buildings. Built as a coding challenge for [Radiator Labs](https://www.radiatorlabs.com/)
 
-![Cover Image of App](./readme-images/cover.png)
+[![Cover Image of App](./readme-images/cover.png)](https://radiator-labs.herokuapp.com/)
 
 ---
 ## Technology
@@ -15,7 +15,7 @@ Dashboard to monitor steam radiators in NYC buildings. Built as a coding challen
 
 ## Deployed Version
 
-A deployed version can be found [HERE](https://radiator-labs.herokuapp.com/) (Give it a few seconds load it's on a free Heroku account)
+A deployed version can be found [HERE](https://radiator-labs.herokuapp.com/) (Give it a few seconds to load it's on a free Heroku account)
 ## Running Application
 
 ## Requirements
