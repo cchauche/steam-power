@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import { Toolbar, Typography } from '@material-ui/core';
-import { toLocalTimeDateString } from '../../utils';
+import { format } from '../../utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,7 +34,7 @@ function BuildingOverview({
         <div className={classes.detailContainer}>
           <Typography variant="h6">Last Reading</Typography>
           <Typography variant="subtitle2" component="p">
-            {toLocalTimeDateString(lastReading)}
+            {format.toLocalTimeDateString(lastReading)}
           </Typography>
         </div>
         <div className={classes.detailContainer + ' ' + classes.divider}>
@@ -52,5 +53,12 @@ function BuildingOverview({
     </Paper>
   );
 }
+
+BuildingOverview.propTypes = {
+  lastReading: PropTypes.number.isRequired,
+  nodeCount: PropTypes.number.isRequired,
+  unresponsiveCount: PropTypes.number.isRequired,
+  tempErrCount: PropTypes.number.isRequired,
+};
 
 export default BuildingOverview;
