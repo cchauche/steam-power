@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ListItem, ListItemText, Badge } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
-import { toFriendlyFloorName } from '../../utils';
+import { format } from '../../utils';
 
 const useStyles = makeStyles((theme) => ({
   selected: {
@@ -25,7 +25,7 @@ function FloorMenuItem({ floor, index, selectedFloor, setSelectedFloor }) {
       onClick={() => setSelectedFloor(index)}
       className={isSelected ? classes.selected : null}
     >
-      <ListItemText primary={toFriendlyFloorName(floor.name)} />
+      <ListItemText primary={format.toFriendlyFloorName(floor.name)} />
       {totalErrors > 0 ? (
         <Badge
           badgeContent={totalErrors}

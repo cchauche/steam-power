@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import PropTypes from 'prop-types';
 import RadiatorTempDisplay from './RadiatorTempDisplay';
-import { toLocalTimeDateString } from '../../utils';
+import { format } from '../../utils';
 import RoomTempDisplay from './RoomTempDisplay';
 
 const useStyles = makeStyles((theme) => ({
@@ -60,7 +60,7 @@ function NodeCardContent({ node }) {
         <Divider />
         <Box textAlign="center" pt={0.5} position="relative">
           <Typography variant="subtitle2" className={classes.unresponsiveTime}>
-            {toLocalTimeDateString(node.last_message)}
+            {format.toLocalTimeDateString(node.last_message)}
           </Typography>
           <Typography variant="subtitle2" color="textSecondary">
             {node.lora_euid}
