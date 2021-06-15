@@ -19,4 +19,10 @@ module.exports = {
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
   },
+  globals: {
+    beforeAll: 'readonly',
+    describe: 'readonly',
+    expect: 'readonly',
+    test: 'readonly',
+  },
 };
